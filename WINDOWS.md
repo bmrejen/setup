@@ -104,10 +104,10 @@ sudo apt-get install -y git
 A text editor is one of the most important tools of a developer.
 
 We are going to download Sublime from https://www.sublimetext.com/3
+
 Install the Windows version.
 
-
-Follow these instructions in the Terminal:
+Once you are done, follow these instructions in the Terminal:
 
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
