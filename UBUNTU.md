@@ -2,7 +2,6 @@
 
 The following instructions will help you to get ready for [Le Wagon](http://www.lewagon.org) fullstack bootcamp:
 
-- Grab a text editor, where you'll spend your day and nights
 - Install a package manager
 - Pimp your Terminal
 - Setup git and GitHub
@@ -28,28 +27,6 @@ sudo apt install -y git
 
 :bulb: To **paste it in the terminal**, you need to use `Ctrl` + `Shift` + `V`.
 
-
-## Sublime Text 3 - Your text editor
-
-A text editor is one of the most important tools of a developer.
-Follow these instructions in the Terminal:
-
-```bash
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-```
-
-:point_up: This command will ask for your password with: `[sudo] password for <username>:`. Don't panick! Calmy type your password key by key. You won't have a visual feedback (like little `*`), that's **perfectly normal**, keep on typing. When you're done, hit `Enter` :muscle:.
-
-```bash
-sudo apt install -y apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt update
-sudo apt install -y sublime-text
-```
-
-Sublime Text is free without any time limitation but a popup will appear every ten saves to remind you there is a license to buy. You can hit `Esc` when this happens, but feel free to buy Sublime Text if you really like this one (there are alternatives).
-
-
 ## Oh-my-zsh - Fancy your Terminal
 
 We will use the shell named `zsh` instead of `bash`, the default one.
@@ -73,6 +50,14 @@ To make this change stick, restart your laptop (or virtual machine):
 sudo reboot
 ```
 
+## Visual Studio Code
+```
+sudo snap install --classic code # or code-insiders
+```
+add the following line to ~/.config/Code/User/settings.json
+```
+"window.titleBarStyle": "custom",
+```
 
 ## GitHub
 
