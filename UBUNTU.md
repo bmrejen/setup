@@ -2,7 +2,6 @@
 
 The following instructions will help you to get ready for [Le Wagon](http://www.lewagon.org) fullstack bootcamp:
 
-- Grab a text editor, where you'll spend your day and nights
 - Install a package manager
 - Pimp your Terminal
 - Setup git and GitHub
@@ -23,39 +22,17 @@ To install `git`, first open a terminal. To open a terminal, you can click on th
 Then copy this line with `Ctrl` + `C`:
 
 ```bash
-sudo apt-get install -y git
+sudo apt install -y git
 ```
 
 :bulb: To **paste it in the terminal**, you need to use `Ctrl` + `Shift` + `V`.
-
-
-## Sublime Text 3 - Your text editor
-
-A text editor is one of the most important tools of a developer.
-Follow these instructions in the Terminal:
-
-```bash
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-```
-
-:point_up: This command will ask for your password with: `[sudo] password for <username>:`. Don't panick! Calmy type your password key by key. You won't have a visual feedback (like little `*`), that's **perfectly normal**, keep on typing. When you're done, hit `Enter` :muscle:.
-
-```bash
-sudo apt-get install -y apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get install -y sublime-text
-```
-
-Sublime Text is free without any time limitation but a popup will appear every ten saves to remind you there is a license to buy. You can hit `Esc` when this happens, but feel free to buy Sublime Text if you really like this one (there are alternatives).
-
 
 ## Oh-my-zsh - Fancy your Terminal
 
 We will use the shell named `zsh` instead of `bash`, the default one.
 
 ```bash
-sudo apt-get install -y zsh curl vim nodejs imagemagick jq
+sudo apt install -y zsh curl vim nodejs imagemagick jq
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # it will ask for your session password
 ```
@@ -73,6 +50,14 @@ To make this change stick, restart your laptop (or virtual machine):
 sudo reboot
 ```
 
+## Visual Studio Code
+```
+sudo snap install --classic code # or code-insiders
+```
+add the following line to ~/.config/Code/User/settings.json
+```
+"window.titleBarStyle": "custom",
+```
 
 ## GitHub
 
@@ -92,7 +77,7 @@ mkdir -p ~/.ssh && ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519 -C "TYPE
 **NB:** when asked for a passphrase, put something you want (and that you'll remember),
 it's a password to protect your private key stored on your hard drive. You'll type,
 nothing will show up on the screen, **that's normal**. Just type the passphrase,
-and when you're done, press Enter.
+and when you're done, press `Enter`.
 
 Then you need to give your **public** key to GitHub. Run:
 
@@ -132,7 +117,13 @@ understanding of what those keys are used for.
 
 Hackers love to refine and polish their shell and tools. We'll start with a great default configuration provided by [Le Wagon](http://github.com/lewagon/dotfiles), stored on GitHub. As your configuration is personal, you need your own repository storing it, so you first need to fork it to your GitHub account.
 
-:arrow_right: [Click here to **fork**](https://github.com/lewagon/dotfiles/fork) the `lewagon/dotfiles` repository to your account. Forking means that it will create a new repo in your GitHub account, identical to the original one. You'll have a new repository on your GitHub account, `your_github_username/dotfiles`. We need to fork because each of you will need to put specific information (e.g. your name) in those files.
+:arrow_right: [Click here to **fork**](https://github.com/lewagon/dotfiles/fork) the `lewagon/dotfiles` repository to your account.
+
+You should arrive on a page that looks like this. Make sure to **select your GitHub account**.
+
+![](images/fork.png)
+
+Forking means that it will create a new repo in your GitHub account, identical to the original one. You'll have a new repository on your GitHub account, `your_github_username/dotfiles`. We need to fork because each of you will need to put specific information (e.g. your name) in those files.
 
 Open your terminal. **Don't blindly copy paste this line**, replace `replace_this_with_your_github_username` with *your*
 own github usernickname.
@@ -210,8 +201,8 @@ rm -rf ~/.rbenv
 Then in the terminal, run:
 
 ```bash
-sudo apt-get install -y build-essential tklib zlib1g-dev libssl-dev libffi-dev libxml2 libxml2-dev libxslt1-dev libreadline-dev
-sudo apt-get clean
+sudo apt install -y build-essential tklib zlib1g-dev libssl-dev libffi-dev libxml2 libxml2-dev libxslt1-dev libreadline-dev
+sudo apt clean
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 ```
@@ -224,14 +215,14 @@ Now, you are ready to install the latest ruby version, and set it as the default
 Run this command, it will **take a while (5-10 minutes)**
 
 ```bash
-rbenv install 2.4.3
+rbenv install 2.6.3
 ```
 
 Once the ruby installation is done, run this command to tell the system
-to use the 2.4.3 version by default.
+to use the 2.6.3 version by default.
 
 ```bash
-rbenv global 2.4.3
+rbenv global 2.6.3
 ```
 
 Then **restart** your Terminal again (close it and reopen it).
@@ -240,7 +231,7 @@ Then **restart** your Terminal again (close it and reopen it).
 ruby -v
 ```
 
-You should see something starting with `ruby 2.4.3p`. If not, ask a teacher.
+You should see something starting with `ruby 2.6.3p`. If not, ask a teacher.
 
 ## Installing some gems
 
@@ -251,12 +242,11 @@ You should see something starting with `ruby 2.4.3p`. If not, ask a teacher.
 ```bash
 # China only!
 gem sources --remove https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
+gem sources -a https://gems.ruby-china.com/
 gem sources -l
 # *** CURRENT SOURCES ***
-
-# https://ruby.taobao.org
-# Ensure it only has ruby.taobao.org
+# https://gems.ruby-china.com/
+# Ruby-china.com must be in the list now
 ```
 
 ---
@@ -264,7 +254,7 @@ gem sources -l
 All, please run the following line:
 
 ```bash
-gem install rake bundler rspec rubocop pry pry-byebug hub colored octokit
+gem install rake bundler rspec rubocop rubocop-performance pry pry-byebug hub colored octokit
 ```
 
 **Never** install a gem with `sudo gem install`! Even if you stumble upon a Stackoverflow answer
@@ -277,12 +267,29 @@ In a few weeks, we'll talk about SQL and Databases and you'll need something cal
 an open-source robust and production-ready database. Let's install it now.
 
 ```
-sudo apt-get install -y postgresql postgresql-contrib libpq-dev build-essential
-echo `whoami` > /tmp/caller
-sudo su - postgres
-psql --command "CREATE ROLE `cat /tmp/caller` LOGIN createdb;"
-exit
-rm -f /tmp/caller
+sudo apt install -y postgresql postgresql-contrib libpq-dev build-essential
+sudo -u postgres psql --command "CREATE ROLE `whoami` LOGIN createdb;"
+```
+
+
+## Ubuntu inotify
+
+Ubuntu is always tracking changes in your folders, and to do this it uses inotify.
+By default the Ubuntu limit is set to 8192 files monitored.
+
+As programming involves a lot of files, we need to raise this limit.
+In your terminal run:
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+## Extra
+
+On our pedagogical platform (Kitt, you'll soon discover it!), we have some videos. By default Firefox on Linux cannot play them as they use an unsupported codec (H264). To get those videos working for you, you need to run this:
+
+```bash
+sudo apt install libavcodec-extra -y
 ```
 
 

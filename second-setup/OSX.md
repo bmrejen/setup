@@ -13,7 +13,6 @@ xcode-select --install
 ## Homebrew
 
 ```bash
-sudo rm -rf /usr/local/Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 sudo chown -R $(whoami) $(brew --prefix)/*
 brew update
@@ -64,8 +63,8 @@ sudo rm -rf $HOME/.rbenv /usr/local/rbenv /opt/rbenv /usr/local/opt/rbenv
 brew uninstall --force rbenv ruby-build
 unset RBENV_ROOT && exec zsh
 brew install rbenv ruby-build && exec zsh
-rbenv install 2.4.3
-rbenv global 2.4.3
+rbenv install 2.6.3
+rbenv global 2.6.3
 ```
 
 (`⌘` + `Q`) your terminal and restart it. Check your ruby version with:
@@ -77,10 +76,10 @@ ruby -v
 ## Gems
 
 ```ruby
-gem install bundler rails
+gem install rake bundler rspec rubocop pry pry-byebug hub colored octokit rails
 ```
 
-Check our rails version with:
+(`⌘` + `Q`) your terminal and restart it. Check your rails version with:
 
 ```bash
 rails -v

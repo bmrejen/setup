@@ -3,7 +3,16 @@
 We will use the shell named `zsh` instead of `bash`, the default one.
 
 ```bash
-sudo apt install -y zsh curl vim nodejs imagemagick jq
+sudo apt install -y zsh curl vim imagemagick jq
+```
+
+We need to install the latest version of nodejs:
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # it will ask for your session password
 ```
@@ -15,8 +24,4 @@ your prompt should look like this:
 
 If it doesn't, **ask a teacher**.
 
-To make this change stick, restart your laptop (or virtual machine):
-
-```bash
-sudo reboot
-```
+To make this change stick, close your terminal and open it again.

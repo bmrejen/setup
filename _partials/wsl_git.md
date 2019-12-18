@@ -7,5 +7,3 @@ Then copy this line with `Ctrl` + `C`:
 ```bash
 sudo apt install -y git
 ```
-
-:bulb: To **paste it in the terminal**, you need to use `Ctrl` + `Shift` + `V`.

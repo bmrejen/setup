@@ -3,14 +3,14 @@ Now, you are ready to install the latest ruby version, and set it as the default
 Run this command, it will **take a while (5-10 minutes)**
 
 ```bash
-rbenv install 2.4.3
+rbenv install 2.6.3
 ```
 
 Once the ruby installation is done, run this command to tell the system
-to use the 2.4.3 version by default.
+to use the 2.6.3 version by default.
 
 ```bash
-rbenv global 2.4.3
+rbenv global 2.6.3
 ```
 
 Then **restart** your Terminal again (close it and reopen it).
@@ -19,7 +19,7 @@ Then **restart** your Terminal again (close it and reopen it).
 ruby -v
 ```
 
-You should see something starting with `ruby 2.4.3p`. If not, ask a teacher.
+You should see something starting with `ruby 2.6.3p`. If not, ask a teacher.
 
 ## Installing some gems
 
@@ -30,12 +30,11 @@ You should see something starting with `ruby 2.4.3p`. If not, ask a teacher.
 ```bash
 # China only!
 gem sources --remove https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
+gem sources -a https://gems.ruby-china.com/
 gem sources -l
 # *** CURRENT SOURCES ***
-
-# https://ruby.taobao.org
-# Ensure it only has ruby.taobao.org
+# https://gems.ruby-china.com/
+# Ruby-china.com must be in the list now
 ```
 
 ---
@@ -43,7 +42,7 @@ gem sources -l
 All, please run the following line:
 
 ```bash
-gem install rake bundler rspec rubocop pry pry-byebug hub colored octokit
+gem install rake bundler rspec rubocop rubocop-performance pry pry-byebug hub colored octokit
 ```
 
 **Never** install a gem with `sudo gem install`! Even if you stumble upon a Stackoverflow answer

@@ -1,3 +1,6 @@
+_DISCLAIMER We heavily recommend a minimal hardware configuration to consider this Windows Linux Subsystem setup: A SSD drive and at least 8Go RAM are mandatory_
+
+
 # Setup instructions
 
 The following instructions will help you to get ready for [Le Wagon](http://www.lewagon.org) fullstack bootcamp:
@@ -9,29 +12,47 @@ The following instructions will help you to get ready for [Le Wagon](http://www.
 - Install Ruby
 
 
-## Command Line Tools
+## Prerequisites
 
-Open the Terminal (click the magnifying glass icon in the top right corner of your screen and type `Terminal`):
+First you need to check your machine runs on Windows 10 build 1615 or later. Follow theses steps to [check your build](https://docs.microsoft.com/en-us/windows/wsl/troubleshooting#check-your-build-number). For earlier versions of Windows 10, follow [Le Wagon Windows setup](WINDOWS.md).
 
-![](images/open-terminal.png)
+### Ubuntu on Windows
 
-Copy-paste the following command in the terminal and hit Enter.
-
+Press `Windows key`, then type `powershell`. Right click on `Windows PowerShell (x86)` then click on `Run as administrator`
+A blue window will open, run the following command in it:
 ```bash
-xcode-select --install
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+The terminal will offer you to restart your computer, type `y` and press `Enter`.
+
+Download [Ubuntu on Windows](https://www.microsoft.com/fr-fr/store/p/ubuntu/9nblggh4msv6?rtc=1) from the Windows Store. Once download has completed, select _Launch_. This will open a console window. Wait for installation to complete then you will be prompted to create your LINUX user account. Create your LINUX username and password. This user account has no relationship to your Windows username and password and hence can be different.
+
+You're now ready to use your Linux environment 👏.
+
+To open a terminal, press `Windows key`, then type `Ubuntu` (it might show up earlier, though), then `Enter`
+
+You will have to copy-paste a lot of commands in this guide. While copying to the clipboard works as everywhere else by selecting the text, and pressing `Ctrl` + `C`, pasting into the terminal is done by right-clicking anywhere within the terminal window.
+
+Start with this command that installs a few useful utilities that will be needed later:
+```bash
+sudo apt update
+sudo apt install -y apt-transport-https unzip gnome-terminal
 ```
 
-If you'll receive the following message, you can just skip this step and go to next step.
+:point_up: This command will ask for your password with: `[sudo] password for <username>:`. The Linux terminal won't give you any feedback, like `\*`, as you might be used to. You just have to type it correctly, and then press `Enter`. If you type it wrong, you will be asked again otherwise the terminal will remember it until it is closed.
 
-```
-# command line tools are already installed, use "Software Update" to install updates
-```
+### Menlo for Powerline font
 
-Otherwise, it will open a window asking you if you want to install some software. Accept and wait. If it fails, try again the command line above, sometimes the Apple servers are overloaded.
+Menlo for Powerline is a fancy font for your terminal. Download it from [abertsch/Menlo-for-Powerline repository](https://github.com/abertsch/Menlo-for-Powerline/raw/master/Menlo%20for%20Powerline.ttf) on GitHub. Once download has completed, double-click on the `Menlo for Powerline.ttf` file and install it on windows.
 
-![](images/xcode-select-install.png)
+Then open a terminal and right-click on the Ubuntu logo then choose `>Settings>Fonts>Menlo for Powerline` and save.
 
-While it's downloading, you can go on with configuring your GitHub account, but **stop** before Homebrew. You'll need the command line tools installed for that step.
+### Xming X Server for Windows
+
+You need a X server to run your text editor through your Linux console in the context of your working directory.
+Go to https://sourceforge.net/projects/xming/ and download Xming. Once download has completed, just launch it. You will see a Xming icon in the taskbar.
+
+Xming does not autostart by default. To autostart it when you log into Windows, press `Windows key` + `R`, type `shell:startup`, and press `Enter`. Now drag an Xming icon (e.g. from your Desktop) into the window that just opened.
 
 
 ## GitHub account
@@ -41,53 +62,29 @@ Have you signed up to GitHub? If not, [do it right away](https://github.com/join
 :point_right: **[Upload a picture](https://github.com/settings/profile)** and put your name correctly on your GitHub account. This is important as we'll use an internal dashboard with your avatars. Please do it **now**.
 
 
-## Homebrew
+## Git
 
-On Mac, you need to install [Homebrew](http://brew.sh/) which is a Package Manager.
-It will be used as soon as we need to install some software.
-To do so, open your Terminal and run:
+To install `git`, first open a terminal. To open a terminal, you can click on the Ubuntu Start button in the sidebar and type `Terminal`. Then click on the terminal icon.
 
-```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-This will ask for your confirmation (hit `Enter`) and your laptop session password.
-
-If you already have Homebrew, it will tell you so, that's fine, go on.
-
-Then install some useful software:
+Then copy this line with `Ctrl` + `C`:
 
 ```bash
-brew update
+sudo apt install -y git
 ```
-
-If you get a `/usr/local must be writable` error, just run this:
-
-```bash
-sudo chown -R $USER:admin /usr/local
-brew update
-```
-
-Error message or not, proceed running the following in the terminal (you can copy / paste all the lines at once).
-
-```bash
-function install_or_upgrade { brew ls | grep $1 > /dev/null; if (($? == 0)); then brew upgrade $1; else brew install $1; fi }
-install_or_upgrade "git"
-install_or_upgrade "wget"
-install_or_upgrade "imagemagick"
-install_or_upgrade "jq"
-install_or_upgrade "openssl"
-```
-
 
 ## Sublime Text 3 - Your text editor
 
-A text editor is one of the most important tools of a developer. Go to [this page](http://www.sublimetext.com/3) and download **Sublime Text 3** for OS X. Install it (double click the downloaded file and drag & drop the app **into** the `Applications` folder, **don't skip this**). If you had Sublime Text 2 installed before, please uninstall it (by dragging/dropping it to the Trash).
+A text editor is one of the most important tools of a developer.
+Follow these instructions in the Terminal:
+
+```bash
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt update
+sudo apt install -y sublime-text
+```
 
 Sublime Text is free without any time limitation but a popup will appear every ten saves to remind you there is a license to buy. You can hit `Esc` when this happens, but feel free to buy Sublime Text if you really like this one (there are alternatives).
-
-Again, make sure that Sublime Text is there, not in the disk image you downloaded. To make sure it's correct, once Sublime Text is installed, unmount the "Sublime Text 3" disk in the left panel of Finder. Finder will complain if something went wrong. Ask a teacher.
-
 
 
 ## Oh-my-zsh - Fancy your Terminal
@@ -95,34 +92,28 @@ Again, make sure that Sublime Text is there, not in the disk image you downloade
 We will use the shell named `zsh` instead of `bash`, the default one.
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sudo apt install -y zsh curl vim imagemagick jq
 ```
 
-Be careful, at the end of this script, it will prompt for your laptop password again. You have to write it correctly (you will not see it when you type) and hit `Enter`. You should get something like:
+We need to install the latest version of nodejs:
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
+```
 
 ```bash
-         __                                     __
-  ____  / /_     ____ ___  __  __   ____  _____/ /_
- / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \
-/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / /
-\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/
-                        /____/                       ....is now installed!
-````
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# it will ask for your session password
+```
 
-Now quit the Terminal (`⌘` + `Q`), and restart it.
+Be careful, those commands will ask you to type your password twice. At the end
+your prompt should look like this:
 
-You should see something like this:
+![](images/ubuntu_oh_my_zsh.png)
 
-![](images/on-my-zsh.png)
+If it doesn't, **ask a teacher**.
 
-If not, **stop right away** and call a teacher.
-
-On Mac, open `Terminal > Preferences` and set the "Pro" theme as default in `Profiles` (*`Réglages`* in French).
-
-![](images/terminal-pro.png)
-
-Quit and relaunch the Terminal. It should now have a nice black background, more easy on the eyes.
-
+To make this change stick, close your terminal and open it again.
 
 ## GitHub
 
@@ -224,9 +215,21 @@ zsh git_setup.sh
 
 Be careful, you **need** to put the **same** email as the one you sign up with on GitHub.
 
-Please now **quit** all your opened terminal windows.
+You need to prepend commands that start applications in a graphical interface outside the command line with `DISPLAY=:0 `, e.g. `DISPLAY=:0 subl`, or set this variable by adding it to `~/.bashrc`, i.e.
+```bash
+echo "export DISPLAY=:0" >> ~/.bashrc
+echo "export DISPLAY=:0" >> ~/.zshrc
+```
+
+We also need to install a graphical library:
+```bash
+sudo apt install libgtk2.0-0
+```
+Restart your terminal.
 
 ### Sublime Text auto-configuration
+
+:warning: Be sure you have a Xming server running or launch it.
 
 Open a new terminal and type this:
 
@@ -235,6 +238,8 @@ stt
 ```
 
 It will **open Sublime Text in the context of your current folder**. That's how we'll use it.
+
+_NB: You can ignore this warning message "st_run: nice(5) failed: operation not permitted"_
 
 **Close Sublime text** and open it again:
 
@@ -250,31 +255,22 @@ If you don't, please install all of them manually. The list is referenced [here]
 
 When it's done, you can close Sublime Text.
 
+### Auto-start `ssh-agent`
 
-### SSH Passphrase
-
-In a terminal window, launch this command:
-
-```bash
-sw_vers
-```
-
-If your OS version (`ProductVersion` line) is greater or equal than **10.12**, you may proceed with the rest of this section. :warning: Otherwise, skip it and go directly to the Ruby install.
-
-In order not to re-type your SSH passphrase at every `git push`, you can add these lines to the `~/.ssh/config` file:
+You don't want to be asked for your passphrase every time you communicate with a distant repository. So you need to add the plugin `ssh-agent` to `oh my zsh`.
+First open `.zshrc` file:
 
 ```bash
-touch ~/.ssh/config  # Creates the file if it does not exist
-st ~/.ssh/config     # Opens the file in Sublime text
+stt ~/.zshrc
 ```
 
-And then add these 3 lines to the file. **Save**.
+Spot the line starting with `plugins=` Then add `ssh-agent` to the plugins list. The list should look like:
 
-```bash
-Host *
-  AddKeysToAgent yes
-  UseKeychain yes
 ```
+plugins=(gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search ssh-agent)
+```
+
+Save the `.zshrc` file with `Ctrl` + `S` and you can close Sublime Text.
 
 
 ## Installing Ruby (with [rbenv](https://github.com/sstephenson/rbenv))
@@ -286,22 +282,19 @@ rvm implode && sudo rm -rf ~/.rvm
 # If you got "zsh: command not found: rvm", carry on. It means `rvm` is not
 # on your computer, that's what we want!
 
-sudo rm -rf $HOME/.rbenv /usr/local/rbenv /opt/rbenv /usr/local/opt/rbenv
+rm -rf ~/.rbenv
 ```
 
-Now let's get [`rbenv`](https://github.com/rbenv/rbenv) and [`ruby-build`](https://github.com/rbenv/ruby-build) packages from Homebrew, they'll be useful.
+Then in the terminal, run:
 
 ```bash
-brew uninstall --force rbenv ruby-build
+sudo apt install -y build-essential tklib zlib1g-dev libssl-dev libffi-dev libxml2 libxml2-dev libxslt1-dev libreadline-dev
+sudo apt clean
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 ```
 
-Then quit **all your opened terminal windows** (Cmd + Q) and restart one. Then run:
-
-```bash
-brew install rbenv
-```
-
-Again, quit all your terminal windows and restart.
+**Close your terminal and open it again** (Alt+F4 and restart it). If you get a warning, just **ignore** it from now (Ruby is not installed yet).
 
 
 Now, you are ready to install the latest ruby version, and set it as the default version.
@@ -355,39 +348,41 @@ gem install rake bundler rspec rubocop rubocop-performance pry pry-byebug hub co
 (or the Terminal) telling you to do so.
 
 
+To be sure that you can interact with your browser installed on Windows from your new Ubuntu terminal:
+Run the appropriate command in your terminal:
+
+If you're using Google Chrome.
+```bash
+echo "export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe" >> ~/.zshrc
+```
+If you're using Mozilla Firefox.
+```bash
+echo "export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Mozilla\ Firefox/firefox.exe" >> ~/.zshrc
+```
+
+Restart your terminal.
+
+
 ## Postgresql
 
 In a few weeks, we'll talk about SQL and Databases and you'll need something called Postgresql,
 an open-source robust and production-ready database. Let's install it now.
 
-```bash
-brew install postgresql
-brew services start postgresql
-```
-
-Once you've done that, let's check if it worked:
 
 ```bash
-psql -d postgres
+sudo apt install -y postgresql postgresql-contrib libpq-dev build-essential
+sudo /etc/init.d/postgresql start
+sudo -u postgres psql --command "CREATE ROLE `whoami` LOGIN createdb;"
 ```
 
-If you enter a new prompt like this one, you're good!
+You can configure PostgreSQL to autostart, so you don't have to execute `sudo /etc/init.d/postgresql start` each time you open a new terminal:
 
 ```bash
-psql (9.5.3)
-Type "help" for help.
-
-postgres=#
+sudo echo "`whoami` ALL=NOPASSWD:/etc/init.d/postgresql start" | sudo tee /etc/sudoers.d/postgresql
+sudo chmod 440 /etc/sudoers.d/postgresql
+echo "sudo /etc/init.d/postgresql start" >> ~/.zshrc
 ```
 
-To quit it, type `\q` then `Enter`.
-
-
-## Security
-
-It is mandatory that you protect your session behind a password.If it is not already the case, go to ` > System Preferences > Users & Groups`, and change your account password. You should also go to ` > System Preferences > Security > General`. You should require a password `5 seconds` after sleep or screen saver begins.
-
-You can also go to ` > System Preferences > Mission Control`, and click on the `Hot Corners` button at the bottom left. Choose for the bottom right corner to start the screen saver. That way, when you leave your desk, you can quickly lock you screen by putting your mouse in the bottom right corner. 5 seconds after, your Macbook will be locked and will ask for a password to get back on the session.
 
 
 ## Check-up
@@ -417,7 +412,9 @@ Once the teacher has approved your profile, go to your email inbox. You should h
 
 ## Slack
 
-[Download](https://itunes.apple.com/fr/app/slack/id803453959?mt=12) the Slack native app from the mac App Store, and sign in to `lewagon-alumni` organization.
+Download and install the Slack app from [slack.com](https://slack.com/downloads/windows), and install it.
+
+Launch the app and sign in to `lewagon-alumni` organization.
 
 Make sure you upload a picture there.
 
@@ -426,41 +423,5 @@ You can also sign in to Slack on your iPhone or Android device!
 The idea is that you'll have Slack open all day, so that you can share useful links / ask for help / decide where to go to lunch / etc.
 
 Enjoy your ride with Le Wagon :)
-
-
-## Keyboard
-
-As you become a programmer, you'll understand that leaving the keyboard takes a lot of time,
-so you'll want to minimize using the trackpad or the mouse. Here are a few tricks on OSX
-to help you do that:
-
-### Keyboard speed
-
-Go to  > System Preferences > Keyboard. Set `Key Repeat` to the fastest position (to the right) and
-`Delay Until Repeat` to the shortest position (to the right).
-
-### Full Keyboard Access
-
-Go to  > System Preferences > Keyboard. Click on the third tab (Shortcuts). At the bottom of the
-pane, click the radio button `All controls`. This way when you get a dialog with several options,
-you'll be able to type `Enter` to confirm, or `Space` to choose the cancel option. If you have more than
-two options, you can use tab to circle between them.
-
-### macOS For hackers
-
-[Read this script](https://github.com/mathiasbynens/dotfiles/blob/master/.macos) and cherry-pick some stuff you think will suit you.
-For instance, you can type in the terminal this one:
-
-```bash
-# Expanding the save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-
-# Save screenshots to the Desktop (or elsewhere)
-defaults write com.apple.screencapture location "${HOME}/Desktop"
-
-# etc..
-```
 
 

@@ -44,9 +44,21 @@ zsh git_setup.sh
 
 Be careful, you **need** to put the **same** email as the one you sign up with on GitHub.
 
-Please now **quit** all your opened terminal windows.
+You need to prepend commands that start applications in a graphical interface outside the command line with `DISPLAY=:0 `, e.g. `DISPLAY=:0 subl`, or set this variable by adding it to `~/.bashrc`, i.e.
+```bash
+echo "export DISPLAY=:0" >> ~/.bashrc
+echo "export DISPLAY=:0" >> ~/.zshrc
+```
+
+We also need to install a graphical library:
+```bash
+sudo apt install libgtk2.0-0
+```
+Restart your terminal.
 
 ### Sublime Text auto-configuration
+
+:warning: Be sure you have a Xming server running or launch it.
 
 Open a new terminal and type this:
 
@@ -55,6 +67,8 @@ stt
 ```
 
 It will **open Sublime Text in the context of your current folder**. That's how we'll use it.
+
+_NB: You can ignore this warning message "st_run: nice(5) failed: operation not permitted"_
 
 **Close Sublime text** and open it again:
 
@@ -69,3 +83,20 @@ To check if plugins are installed, open the Command Palette (`⌘` + `⇧` + `P`
 If you don't, please install all of them manually. The list is referenced [here](https://github.com/lewagon/dotfiles/blob/master/Package%20Control.sublime-settings).
 
 When it's done, you can close Sublime Text.
+
+### Auto-start `ssh-agent`
+
+You don't want to be asked for your passphrase every time you communicate with a distant repository. So you need to add the plugin `ssh-agent` to `oh my zsh`.
+First open `.zshrc` file:
+
+```bash
+stt ~/.zshrc
+```
+
+Spot the line starting with `plugins=` Then add `ssh-agent` to the plugins list. The list should look like:
+
+```
+plugins=(gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search ssh-agent)
+```
+
+Save the `.zshrc` file with `Ctrl` + `S` and you can close Sublime Text.

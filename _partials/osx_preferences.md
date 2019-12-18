@@ -1,6 +1,6 @@
 ## Keyboard
 
-As you become a programer, you'll understand that leaving the keyboard takes a lot of time,
+As you become a programmer, you'll understand that leaving the keyboard takes a lot of time,
 so you'll want to minimize using the trackpad or the mouse. Here are a few tricks on OSX
 to help you do that:
 
@@ -28,7 +28,7 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Save screenshots to the Desktop (or elsewhere)
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture location "${HOME}/Desktop"
 
 # etc..
 ```
